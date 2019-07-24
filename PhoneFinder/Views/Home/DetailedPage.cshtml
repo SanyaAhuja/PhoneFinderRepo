@@ -1,0 +1,30 @@
+﻿@model PhoneFinder.Models.Phone
+@{
+    ViewBag.Title = "DetailedPage";
+}
+
+<h2>DetailedPage</h2>
+
+<section class="phone-finder">
+    <div class="container ">
+        <div class="row">
+
+        </div>
+
+        <div class="col-md-6 col-lg-6">
+            <img src="@Model.ImagePath" alt="Image" width="200" height="200" />
+            @Model.Name
+            @Model.Price,
+            @Model.Dimension,
+            @Model.ReleasedDate
+        </div>
+
+        @if (Request.UrlReferrer != null)
+        {
+            <a class="bottomNav" onclick="history.go(-1); return false;" href="#">Back</a><br />
+        }
+
+
+    </div>
+    </div>
+</section>

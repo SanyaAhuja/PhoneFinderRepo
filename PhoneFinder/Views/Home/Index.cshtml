@@ -1,0 +1,57 @@
+﻿@using PhoneFinder.Models;
+@model List<PhoneFinder.Models.Phone>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var brandList = ViewBag.BrandList as List<Brand>;
+    var osList = ViewBag.OSList as List<OS>;
+}
+<section class="phone-finder">
+    <div class="container ">
+        <div class="row">
+            <div class="phone__left__brand">
+            </div>
+
+            <div class="form-group col-6">
+                <label>Brand</label>
+                <ul class="form-group">
+
+                    @foreach (var brand in brandList)
+                    {
+                    <li>@Html.ActionLink(brand.Name, "GetFilteredList", "Home", new { brandid = brand.Id, osid= 0 }, null)</li>
+                        
+                    }
+                </ul>
+                @*@Html.DropDownList("BrandList", new SelectList(ViewBag.BrandList, "Id", "Name"), "Select", new { @id = "brandList" })*@
+            </div>
+
+            <div class="form-group col-6">
+                <label>Operating System</label>
+                <ul class="form-group">
+
+                    @foreach (var os in osList)
+                    {
+                        <li>@Html.ActionLink(os.Name, "GetFilteredList", "Home", new { osid = os.OSId, brandid = 0 }, null)</li>
+
+                    }
+                </ul>
+            </div>
+
+
+            @foreach (var phone in Model)
+            {
+            <div class="col-md-6 col-lg-6">
+                <a href="@Url.Action("GetDetailList", "Home",new { id = phone.Id }, null)">
+                    <img src="@phone.ImagePath" alt="Image" width="200" height="200" />
+                </a>
+        
+                @Html.ActionLink(@phone.Name, "GetDetailList", "Home", new { id = phone.Id }, null)
+
+            </div>
+
+            }
+           
+    </div>
+    </div>
+</section>
+
